@@ -1,0 +1,17 @@
+{
+  "name": "Fitness RPG",
+  "short_name": "Fitness RPG",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#101014",
+  "theme_color": "#101014",
+  "description": "Your real-life fitness RPG",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

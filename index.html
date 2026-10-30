@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101014"><meta name="description" content="Your real-life fitness RPG">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Fitness RPG</title>
+<style>
+:root{color-scheme:dark;--bg:#101014;--panel:#1a1a22;--panel2:#22222c;--gold:#e8b94f;--muted:#a6a6b3;--green:#78d6a0;--line:#343441}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#24212a 0,#101014 48%);color:#f5f3ee;font:15px system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh;padding-bottom:86px}
+header{padding:24px 18px 14px;max-width:760px;margin:auto}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:2px;font-weight:800}.brand{font-size:27px;font-weight:900;letter-spacing:1px;margin:4px 0}.sub{color:var(--muted);font-size:13px}
+main{max-width:760px;margin:auto;padding:0 14px}.hero{background:linear-gradient(135deg,#29232a,#191922 65%,#29251b);border:1px solid #514332;border-radius:20px;padding:19px;position:relative;overflow:hidden}.hero:after{content:"⚔";position:absolute;right:12px;top:4px;font-size:90px;opacity:.07}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.level{font-size:13px;color:var(--gold);font-weight:800}.rank{font-size:12px;color:var(--muted)}.big{font-size:32px;font-weight:900;margin:4px 0}.muted{color:var(--muted)}.bar{height:9px;background:#393743;border-radius:99px;overflow:hidden;margin:10px 0 5px}.bar>i{display:block;height:100%;background:linear-gradient(90deg,#b47c2b,#f3d47b);width:0%;border-radius:99px;transition:width .25s}.small{font-size:12px;color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:14px}.stat strong{display:block;font-size:21px;margin-top:4px}.stat span{font-size:11px;color:var(--muted)}h2{font-size:17px;margin:22px 2px 10px}.quest{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px;margin:8px 0}.qicon{width:40px;height:40px;display:grid;place-items:center;background:#302b22;border-radius:12px;font-size:20px}.qbody{flex:1;min-width:0}.qbody b{display:block}.qbody small{color:var(--muted)}button{border:0;border-radius:11px;padding:10px 13px;background:var(--gold);color:#19140b;font-weight:800;font-size:12px}button:disabled{background:#393943;color:#8c8c98}.secondary{background:var(--panel2);color:#eee;border:1px solid var(--line)}.tabs{position:fixed;bottom:0;left:0;right:0;background:#15151cf2;backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:5;padding:8px max(8px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom))}.tabs button{background:transparent;color:var(--muted);flex:1;max-width:150px;padding:8px 4px}.tabs button.active{color:var(--gold)}.view{display:none}.view.active{display:block}.skill{background:var(--panel);border:1px solid var(--line);padding:14px;border-radius:14px;margin:9px 0}.skill.locked{opacity:.58}.skill p{color:var(--muted);font-size:12px;margin:5px 0 10px}.tag{font-size:10px;color:var(--gold);border:1px solid #6b552b;padding:3px 7px;border-radius:99px}.formrow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.formrow input{min-width:0;flex:1;background:#111117;border:1px solid var(--line);border-radius:10px;color:white;padding:11px}.notice{background:#20251f;border:1px solid #385443;color:#b9ebca;padding:12px;border-radius:12px;font-size:12px;margin:12px 0}.empty{color:var(--muted);font-size:13px;padding:15px}.footer{font-size:11px;color:var(--muted);text-align:center;padding:24px 4px}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">REAL LIFE • REAL PROGRESSION</div><div class="brand">FITNESS RPG <span style="color:var(--gold)">⚔</span></div><div class="sub">Become stronger, one quest at a time.</div></header>
+<main>
+<section id="dashboard" class="view active">
+ <div class="hero">
+  <div class="row"><span class="level" id="levelLabel">LEVEL 1</span><span class="rank" id="rankLabel">NOVICE • INITIATE</span></div>
+  <div class="big" id="xpLabel">0 XP</div><div class="small" id="nextLabel">100 XP to Level 2</div>
+  <div class="bar"><i id="xpBar"></i></div><div class="row small"><span>Current level progress</span><span id="xpFraction">0 / 100 XP</span></div>
+ </div>
+ <div class="stats">
+  <div class="stat"><span>🔥 STREAK</span><strong id="streak">0 days</strong></div>
+  <div class="stat"><span>🏆 TOTAL XP</span><strong id="totalXp">0</strong></div>
+  <div class="stat"><span>✅ QUESTS</span><strong id="doneCount">0</strong></div>
+ </div>
+ <h2>Today's quests</h2><div id="todayQuests"></div>
+ <div class="notice">Consistency beats intensity. If you miss a day, return the next day. Never punish yourself with extra workouts.</div>
+ <h2>Birthday campaign</h2><div class="card"><div class="row"><b>15 February 2027</b><span class="tag" id="daysLeft">108 DAYS LEFT</span></div><p class="small">Your long-term campaign: build strength, improve fitness and develop visible progress safely.</p><div class="bar"><i id="campaignBar"></i></div><div class="small" id="campaignText"></div></div>
+</section>
+<section id="quests" class="view"><h2>Quest board</h2><p class="small">Complete only what you actually do. XP is awarded once per quest each day.</p><div id="allQuests"></div></section>
+<section id="skills" class="view"><h2>Skill tree</h2><p class="small">Unlock skills by earning XP. Unlocks are milestones, not permission to attempt unsafe moves.</p><div id="skillTree"></div></section>
+<section id="progress" class="view"><h2>Character log</h2><div class="stats"><div class="stat"><span>WORKOUT DAYS</span><strong id="workoutDays">0</strong></div><div class="stat"><span>BEST STREAK</span><strong id="bestStreak">0</strong></div><div class="stat"><span>LEVEL</span><strong id="levelStat">1</strong></div></div>
+ <div class="card"><b>Record a body measurement (optional)</b><p class="small">Use the same conditions each time. Measurements are private on this device.</p><div class="formrow"><input id="weight" type="number" step=".1" placeholder="Weight (kg)"><button onclick="saveWeight()">Save</button></div><div id="weightLog" class="small"></div></div>
+ <h2>Recent activity</h2><div id="history"></div><div class="formrow"><button class="secondary" onclick="exportData()">Export my data</button><button class="secondary" onclick="resetData()">Reset app data</button></div>
+</section>
+<div class="footer">Your progress is stored on this device. This app is a tracker, not medical advice.</div>
+</main>
+<nav class="tabs"><button class="active" data-view="dashboard">⌂<br>Home</button><button data-view="quests">⚔<br>Quests</button><button data-view="skills">✦<br>Skills</button><button data-view="progress">♜<br>Progress</button></nav>
+<script>
+const today=()=>new Date().toLocaleDateString('en-CA');
+const questDefs=[
+ {id:'strength',icon:'💪',name:'Strength training',desc:'Complete your planned home workout',xp:35},
+ {id:'walk',icon:'🚶',name:'Walk or easy cardio',desc:'20–30 minutes at a comfortable pace',xp:20},
+ {id:'mobility',icon:'🧘',name:'Mobility & recovery',desc:'5–10 minutes of gentle mobility',xp:10},
+ {id:'protein',icon:'🍲',name:'Fuel your body',desc:'Include a protein source in your meals',xp:10},
+ {id:'sleep',icon:'🌙',name:'Sleep routine',desc:'Give yourself a consistent wind-down',xp:10}
+];
+const skills=[
+ {name:'Wall push-up',need:0,desc:'Beginner pushing pattern. Start with a comfortable range.'},
+ {name:'Incline push-up',need:100,desc:'Progress to a stable, lower incline when ready.'},
+ {name:'Knee / full push-up',need:250,desc:'Build controlled reps without losing form.'},
+ {name:'Plank',need:400,desc:'Develop trunk stability with short, clean holds.'},
+ {name:'Squat mastery',need:600,desc:'Build lower-body control and comfortable depth.'},
+ {name:'Pike push-up',need:900,desc:'Shoulder strength progression; use careful technique.'},
+ {name:'Pull-up pathway',need:1300,desc:'Work toward a secure bar, rows and assisted hangs.'},
+ {name:'L-sit pathway',need:1800,desc:'Build compression and support strength gradually.'}
+];
+let data=JSON.parse(localStorage.getItem('fitnessRpg')||'null')||{xp:0,completed:{},history:[],weights:[],best:0,streak:0,lastActive:null,workoutDays:0};
+function save(){localStorage.setItem('fitnessRpg',JSON.stringify(data));render()}
+function levelInfo(){let level=1,remaining=data.xp;while(remaining>=level*100){remaining-=level*100;level++}return {level,into:remaining,need:level*100}}
+function rank(l){return l<3?'NOVICE • INITIATE':l<5?'APPRENTICE • WARRIOR':l<8?'ADEPT • VANGUARD':l<12?'ELITE • CHAMPION':'LEGEND • ASCENDANT'}
+function completedToday(){return data.completed[today()]||[]}
+function complete(id){let done=completedToday();if(done.includes(id))return;done.push(id);data.completed[today()]=done;let q=questDefs.find(x=>x.id===id);data.xp+=q.xp;data.history.unshift({date:today(),name:q.name,xp:q.xp});if(id==='strength')data.workoutDays++;if(data.lastActive!==today()){let y=new Date();y.setDate(y.getDate()-1);let yesterday=y.toLocaleDateString('en-CA');data.streak=data.lastActive===yesterday?data.streak+1:1;data.best=Math.max(data.best,data.streak);data.lastActive=today()}save()}
+function questHTML(q){let done=completedToday().includes(q.id);return `<div class="quest"><div class="qicon">${q.icon}</div><div class="qbody"><b>${q.name}</b><small>${q.desc} • +${q.xp} XP</small></div><button ${done?'disabled':''} onclick="complete('${q.id}')">${done?'DONE ✓':'CLAIM'}</button></div>`}
+function render(){let l=levelInfo();document.getElementById('levelLabel').textContent='LEVEL '+l.level;document.getElementById('rankLabel').textContent=rank(l.level);document.getElementById('xpLabel').textContent=data.xp+' XP';document.getElementById('nextLabel').textContent=(l.need-l.into)+' XP to Level '+(l.level+1);document.getElementById('xpFraction').textContent=l.into+' / '+l.need+' XP';document.getElementById('xpBar').style.width=(l.into/l.need*100)+'%';document.getElementById('streak').textContent=data.streak+' days';document.getElementById('totalXp').textContent=data.xp;document.getElementById('doneCount').textContent=data.history.length;document.getElementById('todayQuests').innerHTML=questDefs.slice(0,3).map(questHTML).join('');document.getElementById('allQuests').innerHTML=questDefs.map(questHTML).join('');document.getElementById('skillTree').innerHTML=skills.map(s=>`<div class="skill ${data.xp<s.need?'locked':''}"><div class="row"><b>${data.xp>=s.need?'🔓':'🔒'} ${s.name}</b><span class="tag">${s.need} XP</span></div><p>${s.desc}</p><small class="muted">${data.xp>=s.need?'UNLOCKED':'Need '+(s.need-data.xp)+' more XP'}</small></div>`).join('');document.getElementById('workoutDays').textContent=data.workoutDays;document.getElementById('bestStreak').textContent=data.best;document.getElementById('levelStat').textContent=l.level;document.getElementById('history').innerHTML=data.history.slice(0,12).map(h=>`<div class="quest"><div class="qbody"><b>${h.name}</b><small>${h.date}</small></div><b style="color:var(--gold)">+${h.xp} XP</b></div>`).join('')||'<div class="empty">Your completed quests will appear here.</div>';document.getElementById('weightLog').textContent=data.weights.length?data.weights.slice(-5).map(w=>w.date+': '+w.value+' kg').join(' • '):'No measurements saved.';let start=new Date('2026-10-30T00:00:00'),end=new Date('2027-02-15T00:00:00'),now=new Date();let days=Math.max(0,Math.ceil((end-now)/86400000));document.getElementById('daysLeft').textContent=days+' DAYS LEFT';let pct=Math.min(100,Math.max(0,(now-start)/(end-start)*100));document.getElementById('campaignBar').style.width=pct+'%';document.getElementById('campaignText').textContent=Math.round(pct)+'% of campaign timeline elapsed • Focus on habits, strength and recovery.'}
+function saveWeight(){let v=Number(document.getElementById('weight').value);if(!v||v<20||v>300){alert('Enter a valid weight in kg.');return}data.weights.push({date:today(),value:v});document.getElementById('weight').value='';save()}
+function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='fitness-rpg-data.json';a.click();URL.revokeObjectURL(a.href)}
+function resetData(){if(confirm('Delete all Fitness RPG progress on this device? This cannot be undone.')){localStorage.removeItem('fitnessRpg');data={xp:0,completed:{},history:[],weights:[],best:0,streak:0,lastActive:null,workoutDays:0};save()}}
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.view).classList.add('active')}));
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+render();
+</script>
+</body></html>
