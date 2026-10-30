@@ -1,11 +1,11 @@
 {
-  "name": "Fitness RPG",
+  "name": "Fitness RPG Hunter System",
   "short_name": "Fitness RPG",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#101014",
-  "theme_color": "#101014",
-  "description": "Your real-life fitness RPG",
+  "background_color": "#090b16",
+  "theme_color": "#090b16",
+  "description": "Your real-world training. Your character progression.",
   "icons": [
     {
       "src": "icon.svg",
